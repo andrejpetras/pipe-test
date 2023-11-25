@@ -11,22 +11,16 @@ jobs:
     permissions:
       contents: write    
     steps:
-      - run: |
-          echo ${{ github.event.client_payload.sha }}
-          echo ${{ github.event.client_payload.repo }}
-      - name: Wait for other checks to succeed
-        uses: lewagon/wait-on-check-action@v1.3.1
-        with:
-          ref: ${{ github.ref }}
-          running-workflow-name: 'Test wait'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 10
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.CI_PAT }}
           ref: ${{ github.head_ref }}   
-      - name: Update log
-        run: echo ${{ github.event.client_payload.repo }}-${{ github.event.client_payload.sha }} >> helm/log.txt
+      - uses: lorislab/install-samo-action@v2
+        with:
+          version: "3.6.0"
+      - name: Update helm chart
+        run:
+          samo project helm deps-update --helm-absolute-dir --helm-dir helm --helm-deps-name ${{ github.event.client_payload.repo }} --helm-deps-version ${{ github.event.client_payload.version }}
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: Update version
+          commit_message: chore(deps) update ${{ github.event.client_payload.repo }} to version ${{ github.event.client_payload.version }}
