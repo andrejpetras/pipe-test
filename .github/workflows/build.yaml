@@ -20,7 +20,7 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
           cache: 'maven'
-      - uses: test
+      - name: test
         run: cat helm/log.txt                    
       - uses: lorislab/install-samo-action@v1
       - id: project_version
