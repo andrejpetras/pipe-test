@@ -22,12 +22,4 @@ dependencies:
   enabled: false
   importvalues: []
   alias: app
-- name: andrejpetras/pipe-test-module
-  version: 0.0.0-rc.14
-  repository: ""
-  condition: ""
-  tags: []
-  enabled: false
-  importvalues: []
-  alias: ""
 type: ""
