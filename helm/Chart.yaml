@@ -22,12 +22,4 @@ dependencies:
   enabled: false
   importvalues: []
   alias: app
-- name: --helm-deps-version
-  version: ""
-  repository: ""
-  condition: ""
-  tags: []
-  enabled: false
-  importvalues: []
-  alias: ""
 type: ""
