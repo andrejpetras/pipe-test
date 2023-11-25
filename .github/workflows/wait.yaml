@@ -1,11 +1,8 @@
 name: Build wait
 
 on:
-  push:
-    branches: [main]
   repository_dispatch:
     types: [update-helm-log]
-  workflow_dispatch:
 
 jobs:
   build:
