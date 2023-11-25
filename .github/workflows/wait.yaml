@@ -14,7 +14,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.CI_PAT }}
-          ref: ${{ github.head_ref }}   
+          ref: ${{ github.head_ref }}
+      - run: samo version   
       - uses: lorislab/install-samo-action@v2
         with:
           version: "3.6.0"
