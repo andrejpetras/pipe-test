@@ -1,0 +1,31 @@
+name: Build wait
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'test/**'
+
+jobs:
+  build: Build
+    name: Test wait
+    runs-on: ubuntu-latest
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the changed files back to the repository.
+      contents: write    
+    steps:
+      - name: Wait for other checks to succeed
+        uses: lewagon/wait-on-check-action@v1.3.1
+        with:
+          ref: ${{ github.ref }}
+          running-workflow-name: 'Test wait'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}   
+      - uses: Update log
+        run: echo '$GITHUB_SHA' >> helm/log.txt
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Update version
