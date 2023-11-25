@@ -1,4 +1,4 @@
-name: Build wait
+name: Update helm dependencies
 
 on:
   repository_dispatch:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    name: Test wait
+    name: Update helm dependency
     runs-on: ubuntu-latest
     permissions:
       contents: write    
@@ -15,7 +15,6 @@ jobs:
         with:
           token: ${{ secrets.CI_PAT }}
           ref: ${{ github.head_ref }}
-      - run: samo version   
       - uses: lorislab/install-samo-action@v2
         with:
           version: "3.6.0"
