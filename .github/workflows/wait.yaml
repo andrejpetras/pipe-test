@@ -8,8 +8,8 @@ on:
 
     name: Wait
 jobs:
-  build: Build
-    name: Wait
+  build:
+    name: Test wait
     runs-on: ubuntu-latest
     permissions:
       contents: write    
@@ -18,7 +18,7 @@ jobs:
         uses: lewagon/wait-on-check-action@v1.3.1
         with:
           ref: ${{ github.ref }}
-          running-workflow-name: 'Wait'
+          running-workflow-name: 'Test wait'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 10
       - uses: actions/checkout@v4
